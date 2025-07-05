@@ -7,12 +7,14 @@ import { useTheme } from './ThemeProvider'
 import { scrollToSection } from '@/lib/utils'
 
 const navigation = [
-  { name: 'Home', href: 'hero' },
-  { name: 'About', href: 'about' },
-  { name: 'Experience', href: 'experience' },
-  { name: 'Projects', href: 'projects' },
-  { name: 'Skills', href: 'skills' },
-  { name: 'Contact', href: 'contact' },
+  { name: 'Home', href: 'hero', isSection: true },
+  { name: 'About', href: 'about', isSection: true },
+  { name: 'Experience', href: 'experience', isSection: true },
+  { name: 'Projects', href: 'projects', isSection: true },
+  { name: 'Skills', href: 'skills', isSection: true },
+  { name: 'Blog', href: '/blog', isSection: false },
+  { name: 'Book Now', href: '/booking', isSection: false },
+  { name: 'Contact', href: 'contact', isSection: true },
 ]
 
 export function Navbar() {
@@ -29,8 +31,12 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleNavClick = (href: string) => {
-    scrollToSection(href)
+  const handleNavClick = (href: string, isSection: boolean) => {
+    if (isSection) {
+      scrollToSection(href)
+    } else {
+      window.location.href = href
+    }
     setIsMobileMenuOpen(false)
   }
 
@@ -62,7 +68,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <motion.button
-            onClick={() => handleNavClick('hero')}
+            onClick={() => handleNavClick('hero', true)}
             className="font-serif text-2xl font-bold gradient-text hover:scale-105 transition-transform"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -75,7 +81,7 @@ export function Navbar() {
             {navigation.map((item, index) => (
               <motion.button
                 key={item.name}
-                onClick={() => handleNavClick(item.href)}
+                onClick={() => handleNavClick(item.href, item.isSection)}
                 className="text-foreground hover:text-primary transition-colors font-medium relative group"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -128,7 +134,7 @@ export function Navbar() {
                 {navigation.map((item, index) => (
                   <motion.button
                     key={item.name}
-                    onClick={() => handleNavClick(item.href)}
+                    onClick={() => handleNavClick(item.href, item.isSection)}
                     className="text-left text-foreground hover:text-primary transition-colors font-medium py-2"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
