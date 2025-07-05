@@ -368,9 +368,9 @@ function DateTimeSelection({ selectedDate, selectedTime, timeSlots, onSelectDate
             <Clock className="w-5 h-5" />
             Available Times
           </h3>
-          {selectedDate ? (
-            <div className="grid grid-cols-2 gap-3">
-              {timeSlots.map((time) => (
+                     {selectedDate ? (
+             <div className="grid grid-cols-2 gap-3">
+               {timeSlots.map((time: string) => (
                 <motion.button
                   key={time}
                   whileHover={{ scale: 1.05 }}

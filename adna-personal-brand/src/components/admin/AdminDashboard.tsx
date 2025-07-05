@@ -460,7 +460,7 @@ function TopContent({ content }: { content: any[] }) {
 }
 
 function BookingCard({ booking }: { booking: any }) {
-  const statusColor = {
+  const statusColor: Record<string, string> = {
     confirmed: 'text-green-600 bg-green-100',
     pending: 'text-yellow-600 bg-yellow-100',
     cancelled: 'text-red-600 bg-red-100'
